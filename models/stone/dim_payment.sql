@@ -4,7 +4,7 @@
 
 WITH base_payment AS (
     SELECT DISTINCT
-        ,metodo_captura
+        metodo_captura
         ,metodo_pagamento
         ,bandeira_cartao
     FROM {{ ref('base_transaction') }}    
