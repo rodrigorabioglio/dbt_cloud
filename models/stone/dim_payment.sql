@@ -1,4 +1,4 @@
-{{ config(materialized='table'
+{{ config(materialized='table',
     dist='all'
     ) }}
 
