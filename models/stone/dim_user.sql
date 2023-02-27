@@ -1,4 +1,5 @@
-{{ config(materialized='table'
+{{ config(
+    materialized='table',
     dist='auto',
     sort='codigo_usuario'
     ) }}
