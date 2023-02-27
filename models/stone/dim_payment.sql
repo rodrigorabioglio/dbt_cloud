@@ -1,7 +1,7 @@
 {{
     config(
         materialized='incremental',
-        unique_key='codigo_transacao',
+        unique_key='payment_id',
         sort='payment_id',
         dist='all'
     )
@@ -15,7 +15,7 @@ WITH base_payment AS (
     FROM {{ ref('base_transaction') }}
     WHERE TRUE
         {% if is_incremental() %}
-        AND dt_transacao >= (SELECT MAX(dt_transacao) FROM {{ this }})
+        AND dt_transacao >= (SELECT MAX(dt_transacao) FROM {{ ref('base_transaction') }})
         {% endif %}
 )
 
