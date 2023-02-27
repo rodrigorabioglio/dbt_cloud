@@ -16,6 +16,8 @@ WITH deduped_transactions AS (
         {% if is_incremental() %}
         AND DATEADD(day, 120, "data e hora da transacao") >= (SELECT MAX(dt_transacao) FROM {{ this }})
         {% endif %} 
+    GROUP BY 1
+    HAVING COUNT(*) > 1
 )
 
 SELECT
@@ -30,9 +32,11 @@ SELECT
 	t."estado do usuario" AS uf_usuario, 
 	t."cidade do usuario" AS cidade_usuario
 FROM public.transactions t
-JOIN deduped_transactions dt
+LEFT JOIN deduped_transactions dt
     ON t."codigo da transacao" = dt.codigo_transacao
-WHERE TRUE 
+WHERE TRUE
+    AND dt.codigo_transacao IS NULL
+    AND "estado da transacao" IN ('PAID', 'REFUSED', 'REFUNDED', 'CHARGEDBACK')
     {% if is_incremental() %}
     AND DATEADD(day, 120, CONVERT_TIMEZONE('America/Sao_Paulo',t."data e hora da transacao")) >= (SELECT MAX(dt_transacao) FROM {{ this }})
     {% endif %}

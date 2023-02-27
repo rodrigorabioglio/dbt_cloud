@@ -3,7 +3,7 @@
         materialized='incremental',
         unique_key='location_id',
         dist='location_id',
-        sort='auto'
+        sort='location_id'
     ) 
 }}
 
