@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: fact_transaction
+    columns:
+      - name: codigo_transacao
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: estado_transacao
+        description: "Check if values match accepted values described in the prbolem"
+        tests:
+          - accepted_values:
+              values: ['PAID', 'REFUSED', 'REFUNDED', 'CHARGEDBACK']
+
+  - name: dim_user
+    columns:
+      - name: codigo_usuario
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
