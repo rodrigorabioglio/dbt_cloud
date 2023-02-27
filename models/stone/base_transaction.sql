@@ -14,7 +14,7 @@ WITH deduped_transactions AS (
     WHERE TRUE
         AND "estado da transacao" IN ('PAID', 'REFUSED', 'REFUNDED', 'CHARGEDBACK')
         {% if is_incremental() %}
-        AND DATEADD(day, -120, "data e hora da transacao") >= (SELECT MAX(dt_transacao) FROM {{ this }})
+        AND DATEADD(day, 120, "data e hora da transacao") >= (SELECT MAX(dt_transacao) FROM {{ this }})
         {% endif %} 
 )
 
@@ -34,5 +34,5 @@ JOIN deduped_transactions dt
     ON t."codigo da transacao" = dt.codigo_transacao
 WHERE TRUE 
     {% if is_incremental() %}
-    AND DATEADD(day, -120, t."data e hora da transacao") >= (SELECT MAX(dt_transacao) FROM {{ this }})
+    AND DATEADD(day, 120, CONVERT_TIMEZONE('America/Sao_Paulo',t."data e hora da transacao")) >= (SELECT MAX(dt_transacao) FROM {{ this }})
     {% endif %}

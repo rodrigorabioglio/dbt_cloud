@@ -21,3 +21,19 @@ models:
         tests:
           - unique
           - not_null
+  
+  - name: dim_payment
+    columns:
+      - name: payment_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_location
+    columns:
+      - name: location_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
