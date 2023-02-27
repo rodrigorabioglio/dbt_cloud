@@ -15,7 +15,7 @@ WITH base_payment AS (
     FROM {{ ref('base_transaction') }}
     WHERE TRUE
         {% if is_incremental() %}
-        AND DATEADD(day, -120, dt_transacao) >= (SELECT MAX(dt_transacao) FROM {{ this }})
+        AND dt_transacao >= (SELECT MAX(dt_transacao) FROM {{ this }})
         {% endif %}
 )
 
