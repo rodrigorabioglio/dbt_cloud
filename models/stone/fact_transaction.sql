@@ -1,8 +1,11 @@
-{{ config(
-    materialized='table',
-    dist='auto',
-    sort=['dt_transacao','codigo_usuario']
-    ) }}
+{{
+    config(
+        materialized='incremental',
+        unique_key='codigo_transacao',
+        sort=['dt_transacao','codigo_usuario'],
+        dist='auto'
+    )
+}}
 
 SELECT
     codigo_transacao
@@ -14,3 +17,7 @@ SELECT
         ['metodo_captura','metodo_pagamento','bandeira_cartao']
     ) }} AS payment_id
 FROM {{ ref('base_transaction') }} AS base_transaction
+WHERE TRUE
+    {% if is_incremental() %}
+    AND DATEADD(day, -120, dt_transacao) >= (SELECT MAX(dt_transacao) FROM {{ this }})
+    {% endif %}
