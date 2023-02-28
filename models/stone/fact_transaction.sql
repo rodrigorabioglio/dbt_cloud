@@ -21,6 +21,7 @@ SELECT
     ) }} AS location_id
 FROM {{ ref('base_transaction') }} AS base_transaction
 WHERE TRUE
+    AND valor_transacao <= 1.5*(SELECT iqr FROM {{ ref('transaction_interquartile_range') }})
     {% if is_incremental() %}
     AND DATEADD(day, 120, dt_transacao) >= (SELECT MAX(dt_transacao) FROM {{ this }})
     {% endif %}
