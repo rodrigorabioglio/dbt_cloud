@@ -29,8 +29,8 @@ SELECT
 	t."estado da transacao" AS estado_transacao , 
 	t."valor da transacao"::float AS valor_transacao, 
 	t."codigo do usuario" AS codigo_usuario, 
-	t."estado do usuario" AS uf_usuario, 
-	t."cidade do usuario" AS cidade_usuario
+	UPPER(t."estado do usuario") AS uf_usuario, 
+	INITCAP(TRANSLATE(LOWER(t."cidade do usuario"),'.ãáéóõíúü',' aaeooiuu')) AS cidade_usuario
 FROM public.transactions t
 LEFT JOIN deduped_transactions dt
     ON t."codigo da transacao" = dt.codigo_transacao
