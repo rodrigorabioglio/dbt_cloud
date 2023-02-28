@@ -37,6 +37,7 @@ LEFT JOIN deduped_transactions dt
 WHERE TRUE
     AND dt.codigo_transacao IS NULL
     AND "estado da transacao" IN ('PAID', 'REFUSED', 'REFUNDED', 'CHARGEDBACK')
+    AND "valor da transacao" <= 1.5*(SELECT iqr FROM {{ ref('transaction_interquartile_range') }})
     {% if is_incremental() %}
     AND DATEADD(day, 120, CONVERT_TIMEZONE('America/Sao_Paulo',t."data e hora da transacao")) >= (SELECT MAX(dt_transacao) FROM {{ this }})
     {% endif %}
