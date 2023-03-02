@@ -29,3 +29,11 @@ models:
         tests:
           - unique
           - not_null
+
+  - name: monthly_churn
+    columns:
+      - name: inc_key
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
