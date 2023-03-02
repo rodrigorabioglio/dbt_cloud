@@ -1,5 +1,11 @@
 version: 2
 
+sources:
+  - name: transactions
+    schema: public
+    tables:
+      - name: transactions
+
 models:
   - name: fact_transaction
     columns:
