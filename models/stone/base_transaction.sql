@@ -10,7 +10,7 @@
 WITH deduped_transactions AS (
     SELECT
         "codigo da transacao" AS codigo_transacao
-    FROM public.transactions
+    FROM {{ source('transactions','transactions') }}
     WHERE TRUE
         AND "estado da transacao" IN ('PAID', 'REFUSED', 'REFUNDED', 'CHARGEDBACK')
         {% if is_incremental() %}
@@ -31,7 +31,7 @@ SELECT
 	t."codigo do usuario" AS codigo_usuario, 
 	UPPER(t."estado do usuario") AS uf_usuario, 
 	INITCAP(TRANSLATE(LOWER(t."cidade do usuario"),'.ãáéóõíúü',' aaeooiuu')) AS cidade_usuario
-FROM public.transactions t
+FROM {{ source('transactions','transactions') }} t
 LEFT JOIN deduped_transactions dt
     ON t."codigo da transacao" = dt.codigo_transacao
 WHERE TRUE
