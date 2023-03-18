@@ -6,4 +6,4 @@ SELECT
     ,account_branch
     ,account_number
     ,account_check_digit
-FROM {{ source('raw','account')}} AS city
+FROM {{ source('raw','accounts')}} AS city
