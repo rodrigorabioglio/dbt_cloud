@@ -1,0 +1,49 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: nubank
+    tables:
+      - name: state
+      - name: country
+      - name: transfer_outs
+      - name: d_week
+      - name: accounts
+      - name: customers
+      - name: d_time
+      - name: pix_movements
+      - name: transfer_ins
+      - name: city
+      - name: d_year
+      - name: d_month
+      - name: d_weekday
+
+models:
+  - name: fact_transaction
+    columns:
+      - name: transaction_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: status
+        description: "Check if values match accepted values described in the prbolem"
+        tests:
+          - accepted_values:
+              values: ['PAID', 'REFUSED', 'REFUNDED', 'CHARGEDBACK']
+  
+  - name: dim_customer
+    columns:
+      - name: customer_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_city
+    columns:
+      - name: city
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
