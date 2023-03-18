@@ -19,7 +19,7 @@ sources:
       - name: d_weekday
 
 models:
-  - name: fact_transaction
+  - name: fact_transactions
     columns:
       - name: transaction_id
         description: "The primary key for this table"
