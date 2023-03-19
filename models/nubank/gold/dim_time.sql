@@ -8,8 +8,6 @@ SELECT
 FROM {{ source('raw','d_time') }} d_time
 JOIN {{ source('raw','d_week') }} d_week
     ON d_week.week_id = d_time.week_id
-JOIN {{ source('raw','d_month') }} d_month
-    ON d_month.week_id = d_time.month_id
 JOIN {{ source('raw','d_weekday') }} d_weekday
     ON d_weekday.weekday_id = d_time.weekday_id
 JOIN {{ source('raw','d_month') }} d_month
