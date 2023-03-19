@@ -1,8 +1,8 @@
 SELECT
     id
     ,account_id
-    ,pix_requested_at
-    ,pix_completed_at
+    ,pix_requested_at AS requested_at
+    ,pix_completed_at AS completed_at
     ,status
     ,'pix' AS transaction_method
     ,CASE

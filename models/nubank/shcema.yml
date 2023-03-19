@@ -19,18 +19,13 @@ sources:
       - name: d_weekday
 
 models:
-  - name: fact_transactions
+  - name: fact_transactions_p2p
     columns:
       - name: transaction_id
         description: "The primary key for this table"
         tests:
           - unique
           - not_null
-      - name: status
-        description: "Check if values match accepted values described in the prbolem"
-        tests:
-          - accepted_values:
-              values: ['PAID', 'REFUSED', 'REFUNDED', 'CHARGEDBACK']
   
   - name: dim_customer
     columns:
@@ -43,6 +38,14 @@ models:
   - name: dim_city
     columns:
       - name: city
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_time
+    columns:
+      - name: time_id
         description: "The primary key for this table"
         tests:
           - unique
