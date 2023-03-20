@@ -5,7 +5,7 @@ SELECT
     ,requested_time.action_timestamp AS requested_at
     ,completed_time.action_timestamp AS completed_at
     ,transactions.status
-    ,transactions.transaction_method
+    ,transactions.product
     ,transactions.transaction_type
     ,transactions.amount
     ,account.account_branch

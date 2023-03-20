@@ -4,7 +4,7 @@ SELECT
     ,pix_requested_at AS requested_at
     ,pix_completed_at AS completed_at
     ,status
-    ,'pix' AS transaction_method
+    ,'pix' AS product
     ,CASE
         WHEN in_or_out = 'pix_out' THEN 'debit'
         WHEN in_or_out = 'pix_in' THEN 'credit'

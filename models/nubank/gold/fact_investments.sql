@@ -5,6 +5,7 @@ SELECT
     ,investment_requested_at AS requested_at
     ,investment_completed_at AS completed_at
     ,status
+    ,'investment' AS product
     ,CASE
         WHEN investment_transfer_out = 'pix_out' THEN 'debit'
         WHEN investment_transfer_in = 'pix_in' THEN 'credit'
