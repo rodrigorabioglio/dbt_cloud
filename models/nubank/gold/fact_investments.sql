@@ -7,8 +7,8 @@ SELECT
     ,status
     ,'investment' AS product
     ,CASE
-        WHEN investment_transfer_out = 'pix_out' THEN 'debit'
-        WHEN investment_transfer_in = 'pix_in' THEN 'credit'
+        WHEN type = 'investment_transfer_out' THEN 'debit'
+        WHEN type = 'investment_transfer_in' THEN 'credit'
     END AS transaction_type
     ,amount 
 FROM {{ source('raw','investments') }}
