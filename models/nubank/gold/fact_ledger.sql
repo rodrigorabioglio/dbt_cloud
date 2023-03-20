@@ -12,4 +12,4 @@ SELECT
     ,product
     ,transaction_type
     ,amount
-FROM {{ ref('fact_investments')}
+FROM {{ ref('fact_investments')}}
