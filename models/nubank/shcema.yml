@@ -20,9 +20,50 @@ sources:
       - name: investments
 
 models:
+
+  - name: abt_ledger
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+
   - name: fact_transactions_p2p
     columns:
-      - name: transaction_id
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+
+  - name: fact_ledger
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+  
+  - name: fact_investments
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+
+  - name: pix
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+  
+  - name: ted
+    columns:
+      - name: id
         description: "The primary key for this table"
         tests:
           - unique
