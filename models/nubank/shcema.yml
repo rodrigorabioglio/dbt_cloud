@@ -17,6 +17,7 @@ sources:
       - name: d_year
       - name: d_month
       - name: d_weekday
+      - name: investments
 
 models:
   - name: fact_transactions_p2p
